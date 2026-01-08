@@ -12,12 +12,10 @@
 
       register: response
 
-    - name: "Print Device Summary"
+    - name: "TASK 2: Print Device Summary"
       debug:
         msg:
-          - "-----------------------------------------"
           - "Hostname: {{ response.facts.hostname }}"
           - "Model: {{ response.facts.model }}"
           - "Version: {{ response.facts.version }}"
           - "Serial: {{ response.facts.serialnumber }}"
-          - "-----------------------------------------"
