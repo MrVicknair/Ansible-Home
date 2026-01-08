@@ -4,4 +4,3 @@ all:
     switches:
       hosts:
         HOMELAB_EX3300-1:
-          ansible_host: "192.168.1.253"
