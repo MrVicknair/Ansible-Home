@@ -6,7 +6,7 @@
   tasks:
     - name: "TASK 1: Get facts"
       juniper.device.facts:
-        hosts: "{{ ansible_host }}"
+        host: "{{ ansible_host }}"
         user: "{{ ansible_user }}"
         passwd: "{{ ansible_password }}"
 
