@@ -1,0 +1,23 @@
+---
+- name: "Gather Juniper Device Facts"
+  hosts: switches
+  gather_facts: no
+
+  tasks:
+    - name: "TASK 1: Get facts"
+      juniper.device.facts:
+        hosts: "{{ ansible_host }}"
+        user: "{{ ansible_user }}"
+        passwd: "{{ ansible_password }}"
+
+      register: response
+
+    - name: "Print Device Summary"
+      debug:
+        msg:
+          - "-----------------------------------------"
+          - "Hostname: {{ response.facts.hostname }}"
+          - "Model: {{ response.facts.model }}"
+          - "Version: {{ response.facts.version }}"
+          - "Serial: {{ response.facts.serialnumber }}"
+          - "-----------------------------------------"
