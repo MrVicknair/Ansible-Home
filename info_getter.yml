@@ -1,12 +1,11 @@
 ---
-- name: "Gather Juniper Device Facts"
+- name: "Play 1: Gather and Print Device Facts"
   hosts: switches
   gather_facts: no
-
   tasks:
-    - name: "TASK 1: Get facts"
+    - name: "TASK 1: Get Juniper Device Facts"
       juniper.device.facts:
-        host: "{{ ansible_host }}"
+        config_format: "json"
         user: "{{ ansible_user }}"
         passwd: "{{ ansible_password }}"
 
