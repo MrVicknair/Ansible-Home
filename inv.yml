@@ -1,0 +1,10 @@
+---
+all:
+  children:
+    switches:
+      hosts:
+        HOMELAB_EX3300-1:
+
+# INI format
+# [switches]
+# HOMELAB_EX3300-1
