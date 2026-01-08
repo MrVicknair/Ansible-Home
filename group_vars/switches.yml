@@ -1,5 +1,4 @@
 ---
-ansible_connection: "ansible.netcommon.netconf"
-ansible_network_os: "junipernetworks.junos.junos"
+ansible_network_os: "junos"
 ansible_user: "ansible"
 ansible_password: "ansible"
