@@ -1,4 +1,3 @@
 ---
-ansible_network_os: junos
 ansible_user: "ansible"
 ansible_password: "@nsible"
