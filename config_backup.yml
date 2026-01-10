@@ -18,6 +18,7 @@
       set_fact:
         timestamp: "{{ lookup('pipe', 'date +%m-%d-%Y') }}"
       delegate_to: localhost
+      run_once: true
 
     - name: "Get Juniper configuration via command"
       cli_command:
