@@ -2,13 +2,12 @@
 - name: "Play 1: Gather and Print Device Facts"
   hosts: switches
   gather_facts: no
-  tasks:
 
+  tasks:
     - name: "TASK 1: Get Juniper Device Facts"       
       juniper.device.facts:
         user: "{{ ansible_user }}"
         passwd: "{{ ansible_password }}"
-
       register: response
 
     - name: "TASK 2: Print Device Summary"
