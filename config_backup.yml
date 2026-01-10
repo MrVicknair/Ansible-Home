@@ -1,0 +1,49 @@
+---
+- name: "Configuration Backup Playbook"
+  hosts: switches
+  gather_facts: no
+  connection: network_cli
+  vars:
+    backup_dir: "./backup"
+
+  tasks:
+    - name: "Create backup directory"
+      file:
+        path: "{{ backup_dir }}"
+        state: directory
+      delegate_to: localhost
+      run_once: true
+
+    - name: "Set timestamp variable"
+      set_fact:
+        timestamp: "{{ lookup('pipe', 'date +%m-%d-%Y') }}"
+      delegate_to: localhost
+
+    - name: "Get Juniper configuration via command"
+      cli_command:
+        command: "show configuration"
+      register: juniper_config
+      when: ansible_network_os == 'junos'
+
+    - name: "Save Juniper configuration to file"
+      copy:
+        content: "{{ juniper_config.stdout }}"
+        dest: "{{ backup_dir }}/{{ inventory_hostname }}_{{ timestamp }}.conf"
+      delegate_to: localhost
+      when: ansible_network_os == 'junos' and juniper_config.stdout is defined
+
+    - name: "Backup Cisco IOS Configuration"
+      cisco.ios.ios_config:
+        backup: yes
+        backup_options:
+          filename: "{{ inventory_hostname }}_{{ timestamp }}.conf"
+          dir_path: "{{ backup_dir }}"
+      when: ansible_network_os == 'ios'
+
+    - name: "Backup Cisco NXOS Configuration"
+      cisco.nxos.nxos_config:
+        backup: yes
+        backup_options:
+          filename: "{{ inventory_hostname }}_{{ timestamp }}.conf"
+          dir_path: "{{ backup_dir }}"
+      when: ansible_network_os == 'nxos'
